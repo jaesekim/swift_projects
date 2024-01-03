@@ -70,6 +70,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="returnHeightTextField:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="VMv-Sh-eKY"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bKc-BT-Kh3">
                                 <rect key="frame" x="40" y="509" width="313" height="50"/>
@@ -78,6 +81,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="returnWeightTextField:" destination="BYZ-38-t0r" eventType="editingDidEndOnExit" id="a0O-re-bDK"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ptc-Mc-2by">
                                 <rect key="frame" x="45" y="659" width="303" height="40"/>

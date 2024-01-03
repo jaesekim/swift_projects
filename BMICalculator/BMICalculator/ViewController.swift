@@ -22,30 +22,56 @@ class ViewController: UIViewController {
     @IBOutlet var randomLabel: UILabel!
     
     @IBOutlet var confirmButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         designCollections()
+        confirmButton.addTarget(self, action: #selector(confirmOnTap), for: .touchUpInside)
+    }
+    
+    // return 누르면 저장되고 키보드 내리기
+    @IBAction func returnHeightTextField(_ sender: UITextField) {
+    }
+    @IBAction func returnWeightTextField(_ sender: UITextField) {
+    }
+    
+    // alert
+    @objc func confirmOnTap() {
+        let alert = UIAlertController(title: "나의 BMI", message: "\(bmiFormula(weight: weightTextField.text!, height: heightTextField.text!))", preferredStyle: .alert)
+        
+        let firstButton = UIAlertAction(title: "확인", style: .cancel)
+        
+        alert.addAction(firstButton)
+        present(alert, animated: true)
     }
         
     // bmi를 계산하고 결과를 보여주는 함수
-    func bmiFormula(weight: Double, height: Double) {
-        let bmi = weight / (height * height)
+    func bmiFormula(weight: String, height: String) -> String {
+        var doubleWeight = Double(weight)
+        var doubleHeight = Double(height)
+        guard let doubleHeight, let doubleWeight else {
+            return "유효한 값이 아닙니다"
+        }
+        if doubleHeight == 0 {
+            return "유효한 값이 아닙니다"
+        }
+        let bmi = doubleWeight / (doubleHeight * doubleHeight)
         switch bmi {
         case ..<18.5:
-            print("저체중")
+            return "저체중"
         case 18.5..<23:
-            print("정상")
+            return "정상"
         case 23..<25:
-            print("과체중")
+            return "과체중"
         case 25..<30:
-            print("경도 비만")
+            return "경도 비만"
         case 30..<35:
-            print("중정도 비만")
+            return "중정도 비만"
         case 35...:
-            print("고도 비만")
+            return "고도 비만"
         default:
-            print("입력한 값이 올바르지 않습니다.")
+            return "올바른 값을 입력하세요"
         }
     }
     // tap gesture 키보드 내리기
@@ -85,6 +111,7 @@ class ViewController: UIViewController {
         weightTextField.layer.cornerRadius = 10
         weightTextField.layer.borderColor = UIColor.gray.cgColor
         weightTextField.layer.borderWidth = 1.5
+        weightTextField.isSecureTextEntry = true
         
         // button design
         confirmButton.setTitle("결과 확인", for: .normal)
