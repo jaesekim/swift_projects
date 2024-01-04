@@ -36,17 +36,17 @@ class ViewController: UIViewController {
     @IBOutlet var sadLabel: UILabel!
     
     // count 변수
-    var smileCount = 0
-    var happyCount = 0
-    var loveCount = 0
+    var smileCount = UserDefaults.standard.integer(forKey: "smileCount")
+    var happyCount = UserDefaults.standard.integer(forKey: "happyCount")
+    var loveCount = UserDefaults.standard.integer(forKey: "loveCount")
     
-    var angryCount = 0
-    var sosoCount = 0
-    var sleepyCount = 0
+    var angryCount = UserDefaults.standard.integer(forKey: "angryCount")
+    var sosoCount = UserDefaults.standard.integer(forKey: "sosoCount")
+    var sleepyCount = UserDefaults.standard.integer(forKey: "sleepyCount")
     
-    var scaryCount = 0
-    var frustratedCount = 0
-    var sadCount = 0
+    var scaryCount = UserDefaults.standard.integer(forKey: "scaryCount")
+    var frustratedCount = UserDefaults.standard.integer(forKey: "frustratedCount")
+    var sadCount = UserDefaults.standard.integer(forKey: "sadCount")
     
     override func viewDidLoad() {
         let groupDict: [Int: [Any]] = [
@@ -101,48 +101,57 @@ class ViewController: UIViewController {
     }
     
     @IBAction func smileOnTap(_ sender: UITapGestureRecognizer) {
-        smileCount += 1
-        setEmotionLabel(label: smileLabel, emotion: "좋아해", count: smileCount)
+        let newCntNum = UserDefaults.standard.integer(forKey: "smileCount") + 1
+        UserDefaults.standard.set(newCntNum, forKey: "smileCount")
+        setEmotionLabel(label: smileLabel, emotion: "좋아해", count: newCntNum)
     }
     
     @IBAction func happyOnTap(_ sender: UITapGestureRecognizer) {
-        happyCount += 1
-        setEmotionLabel(label: happyLabel, emotion: "행복해", count: happyCount)
+        let newCntNum = UserDefaults.standard.integer(forKey: "happyCount") + 1
+        UserDefaults.standard.set(newCntNum, forKey: "happyCount")
+        setEmotionLabel(label: happyLabel, emotion: "행복해", count: newCntNum)
     }
     
     @IBAction func loveOnTap(_ sender: UITapGestureRecognizer) {
-        loveCount += 1
-        setEmotionLabel(label: loveLabel, emotion: "사랑해", count: loveCount)
+        let newCntNum = UserDefaults.standard.integer(forKey: "loveCount") + 1
+        UserDefaults.standard.set(newCntNum, forKey: "loveCount")
+        setEmotionLabel(label: loveLabel, emotion: "사랑해", count: newCntNum)
     }
     
     @IBAction func angryOnTap(_ sender: UITapGestureRecognizer) {
-        angryCount += 1
-        setEmotionLabel(label: angryLabel, emotion: "화났어", count: angryCount)
+        let newCntNum = UserDefaults.standard.integer(forKey: "angryCount") + 1
+        UserDefaults.standard.set(newCntNum, forKey: "angryCount")
+        setEmotionLabel(label: angryLabel, emotion: "화났어", count: newCntNum)
     }
     
     @IBAction func sosoOnTap(_ sender: UITapGestureRecognizer) {
-        sosoCount += 1
-        setEmotionLabel(label: sosoLabel, emotion: "평범해", count: sosoCount)
+        let newCntNum = UserDefaults.standard.integer(forKey: "sosoCount") + 1
+        UserDefaults.standard.set(newCntNum, forKey: "sosoCount")
+        setEmotionLabel(label: sosoLabel, emotion: "평범해", count: newCntNum)
     }
     
     @IBAction func sleepyOnTap(_ sender: UITapGestureRecognizer) {
-        sleepyCount += 1
-        setEmotionLabel(label: sleepyLabel, emotion: "졸려", count: sleepyCount)
+        let newCntNum = UserDefaults.standard.integer(forKey: "sleepyCount") + 1
+        UserDefaults.standard.set(newCntNum, forKey: "sleepyCount")
+        setEmotionLabel(label: sleepyLabel, emotion: "졸려", count: newCntNum)
     }
     
     @IBAction func scaryOnTap(_ sender: UITapGestureRecognizer) {
-        scaryCount += 1
-        setEmotionLabel(label: scaryLabel, emotion: "무서워", count: scaryCount)
+        let newCntNum = UserDefaults.standard.integer(forKey: "scaryCount") + 1
+        UserDefaults.standard.set(newCntNum, forKey: "scaryCount")
+        setEmotionLabel(label: scaryLabel, emotion: "무서워", count: newCntNum)
     }
     
     @IBAction func frustratedOnTap(_ sender: UITapGestureRecognizer) {
-        frustratedCount += 1
-        setEmotionLabel(label: frustratedLabel, emotion: "짜증나", count: frustratedCount)
+        let newCntNum = UserDefaults.standard.integer(forKey: "frustratedCount") + 1
+        UserDefaults.standard.set(newCntNum, forKey: "frustratedCount")
+        setEmotionLabel(label: frustratedLabel, emotion: "짜증나", count: newCntNum)
     }
     
     @IBAction func sadOnTap(_ sender: UITapGestureRecognizer) {
-        sadCount += 1
-        setEmotionLabel(label: sadLabel, emotion: "슬퍼", count: sadCount)
+        let newCntNum = UserDefaults.standard.integer(forKey: "sadCount") + 1
+        UserDefaults.standard.set(newCntNum, forKey: "sadCount")
+        setEmotionLabel(label: sadLabel, emotion: "슬퍼", count: newCntNum)
     }
 }
 
