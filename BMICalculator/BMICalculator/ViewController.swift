@@ -19,14 +19,39 @@ class ViewController: UIViewController {
     
     @IBOutlet var heightTextField: UITextField!
     @IBOutlet var weightTextField: UITextField!
-    @IBOutlet var randomLabel: UILabel!
+
+    @IBOutlet var resetButton: UIButton!
     
     @IBOutlet var confirmButton: UIButton!
+    
+    let weight = UserDefaults.standard.double(forKey: "Weight")
+    let height = UserDefaults.standard.double(forKey: "Height")
+    var nickname = "익명"
+    /*
+        let nickname: String
+    
+        if let preferenceNickname = UserDefaults.standard.string(forKey: "Nickname") {
+            nickname = preferenceNickname
+        } else {
+            nickname = "익명"
+        }
+        
+        nickname 변수 초기화 문제:
+    
+        nickname 변수는 ViewController 클래스의 프로퍼티로 선언되었는데, 선언 시 초기화되지 않았습니다. if-else 구문 내에서 초기화하는 방식은 클래스의 프로퍼티에는 적절하지 않습니다.
+        이를 해결하기 위해서는 viewDidLoad() 내부에서 초기화해야 합니다.
+    */
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let preferenceNickname = UserDefaults.standard.string(forKey: "Nickname") {
+            nickname = preferenceNickname
+        }
+        
         designCollections()
+        
+        // 확인 버튼 눌렀을 때 bmi 계산
         confirmButton.addTarget(self, action: #selector(confirmOnTap), for: .touchUpInside)
     }
     
@@ -36,8 +61,11 @@ class ViewController: UIViewController {
     @IBAction func returnWeightTextField(_ sender: UITextField) {
     }
     
-    // alert
+    // alert 함수
     @objc func confirmOnTap() {
+        UserDefaults.standard.set(Double(weightTextField.text!), forKey: "Weight")
+        UserDefaults.standard.set(Double(heightTextField.text!), forKey: "Height")
+        
         let alert = UIAlertController(title: "나의 BMI", message: "\(bmiFormula(weight: weightTextField.text!, height: heightTextField.text!))", preferredStyle: .alert)
         
         let firstButton = UIAlertAction(title: "확인", style: .cancel)
@@ -84,12 +112,12 @@ class ViewController: UIViewController {
         view.endEditing(true)
     }
     
-    // 랜덤한 BMI 지수 보여주기
-    @IBAction func showRandomBMI(_ sender: UITapGestureRecognizer) {
-        
-        
+    @IBAction func resetOnTap(_ sender: UIButton) {
+        UserDefaults.standard.removeObject(forKey: "Weight")
+        UserDefaults.standard.removeObject(forKey: "Height")
+        weightTextField.text = "0.0"
+        heightTextField.text = "0.0"
     }
-    
     
     // 전반적인 디자인 한 번에 박아넣은 함수
     func designCollections() {
@@ -99,7 +127,7 @@ class ViewController: UIViewController {
         
         // explaination
         explainLabel.text =
-        "당신의 BMI지수를\n알려드릴게요"
+        "\(nickname)님의 BMI지수를\n알려드릴게요"
         explainLabel.numberOfLines = 2
         explainLabel.font = .systemFont(ofSize: 16)
         
@@ -111,22 +139,26 @@ class ViewController: UIViewController {
         heightLabel.font = .boldSystemFont(ofSize: 12)
         weightLabel.text = "몸무게를 입력해 주세요(kg)"
         weightLabel.font = .boldSystemFont(ofSize: 12)
-        randomLabel.text = "랜덤으로 BMI 계산하기"
-        randomLabel.font = .systemFont(ofSize: 12)
-        randomLabel.textColor = .red
-        randomLabel.textAlignment = .right
-        randomLabel.isUserInteractionEnabled = true
         
         // textfield
+        heightTextField.text = "\(UserDefaults.standard.double(forKey: "Height"))"
         heightTextField.layer.cornerRadius = 10
         heightTextField.layer.borderColor = UIColor.gray.cgColor
         heightTextField.layer.borderWidth = 1.5
+        
+        weightTextField.text = "\(UserDefaults.standard.double(forKey: "Weight"))"
         weightTextField.layer.cornerRadius = 10
         weightTextField.layer.borderColor = UIColor.gray.cgColor
         weightTextField.layer.borderWidth = 1.5
         weightTextField.isSecureTextEntry = true
         
         // button design
+        resetButton.setTitle("초기화", for: .normal)
+        resetButton.setTitleColor(.purple, for: .normal)
+        resetButton.layer.cornerRadius = 5
+        resetButton.layer.borderColor = UIColor.purple.cgColor
+    
+        
         confirmButton.setTitle("결과 확인", for: .normal)
         confirmButton.setTitleColor(.white, for: .normal)
         confirmButton.backgroundColor = .purple
